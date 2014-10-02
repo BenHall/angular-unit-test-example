@@ -24,4 +24,19 @@ angular.module('todoApp', [])
         if (!todo.done) $scope.todos.push(todo);
       });
     };
+  }])
+  .controller('TodoHttpController', ['$scope', '$http', function($scope, $http) {
+
+    $scope.makeHttp = function() {
+      $http({method: 'GET', url: 'http://httpbin.org/ip'}).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+          $scope.ip = data.origin;
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    }
   }]);
